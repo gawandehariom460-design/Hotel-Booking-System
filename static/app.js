@@ -1,0 +1,1 @@
+const start=document.querySelector('input[name="check_in"]');const end=document.querySelector('input[name="check_out"]');if(start&&end){start.addEventListener("change",()=>{end.min=start.value;if(end.value&&end.value<=start.value)end.value=""})}
