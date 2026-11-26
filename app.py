@@ -1,3 +1,4 @@
+import os
 from datetime import date
 from secrets import token_hex
 
@@ -6,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
-app.config.update(SECRET_KEY="change-this-demo-key-before-deployment", SQLALCHEMY_DATABASE_URI="sqlite:///hotel_bookings.db", SQLALCHEMY_TRACK_MODIFICATIONS=False)
+app.config.update(SECRET_KEY=os.environ.get("SECRET_KEY", "dev-only-change-this-key"), SQLALCHEMY_DATABASE_URI="sqlite:///hotel_bookings.db", SQLALCHEMY_TRACK_MODIFICATIONS=False)
 db = SQLAlchemy(app)
 CSRFProtect(app)
 
@@ -85,4 +86,4 @@ with app.app_context():
     seed_rooms()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
